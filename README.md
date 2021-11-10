@@ -1,7 +1,7 @@
 # DSE-203-Knowledge-Graph
 
 ## Dataset Ideas
-### Open Payments & Drug Prescriptions
+### Open Payments & Drug PrescriptionsTT40.
 1. CMS Open Payments (Sunshine act) [Data](https://openpaymentsdata.cms.gov/datasets?sort=modified)
 2. Part D prescriptions [Data](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug/data/2019)
 3. CDC Deaths by Type by Month and Year and State [Data](https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts/xkb8-kh2a/)
@@ -21,7 +21,13 @@
 
 
 ### CDC Deaths
-1. Data is shown as 12-month period ending in a particular month. So 12 month period ending in July 2021 will cover the period Aug 1,2020 to July 31,2021
-2. Covers all 50 states and District of Columbia
-3. Relevant Death Causes with Code:
-   - T40.2: natural opioid analgesics, including morphine and codeine, and semisynthetic opioids, including drugs such as oxycodone, hydrocodone, hydromorphone, and oxymorphone.
+1. Data ranges from April 2015 to March 2021.
+2. Data is shown as 12-month period ending in a particular month. So 12 month period ending in July 2021 will cover the period Aug 1,2020 to July 31,2021
+3. Covers all 50 states and District of Columbia
+4. Will focus on cause called Opiods(T40.0-T40.4,T40.6
+   - T40.0: Opium.
+   - T40.1: Heroin.
+   - T40.2: Natural opioid analgesics, including morphine and codeine, and semisynthetic opioids, including drugs such as oxycodone, hydrocodone, hydromorphone, and oxymorphone.
+   - T40.3: Methadone
+   - T40.4: Synthetic opioid analgesics other than methadone, including drugs such as fentanyl and tramadol.
+   - T40.6: Other and unspecified narcotics
