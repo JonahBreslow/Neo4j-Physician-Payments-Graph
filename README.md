@@ -25,6 +25,8 @@
    - Purpose of payment
    - Paying insitution or person
 ### Part D Prescriptions
+1. 
+>The Medicare Part D Prescribers by Provider and Drug dataset provides information on prescription drugs prescribed to Medicare beneficiaries enrolled in Part D >by physicians and other health care providers. This dataset contains the total number of prescription fills that were dispensed and the total drug cost paid >organized by prescribing National Provider Identifier (NPI), drug brand name (if applicable) and drug generic name."
 
 
 ### CDC Deaths
