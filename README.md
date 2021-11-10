@@ -28,7 +28,7 @@
 
 
 ### CDC Deaths
-1. Data ranges from April 2015 to March 2021.
+1. Covers period April 2015 to March 2021.
 2. Data is shown as 12-month period ending in a particular month. So 12 month period ending in July 2021 will cover the period Aug 1,2020 to July 31,2021
 3. Covers all 50 states and District of Columbia
 4. Will focus on cause called Opiods(T40.0-T40.4,T40.6
