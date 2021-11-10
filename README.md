@@ -25,8 +25,12 @@
    - Purpose of payment
    - Paying insitution or person
 ### Part D Prescriptions
-1. 
+1. Data Methodolgy:
 >The Medicare Part D Prescribers by Provider and Drug dataset provides information on prescription drugs prescribed to Medicare beneficiaries enrolled in Part D >by physicians and other health care providers. This dataset contains the total number of prescription fills that were dispensed and the total drug cost paid >organized by prescribing National Provider Identifier (NPI), drug brand name (if applicable) and drug generic name."
+2. Columns:
+   - Prescriber Data (Name, NPI, City, State, Specialty)
+   - Drug Data (Brand, USAN Generic Name - Short Version)
+   - Prescription Data (Number of Medicare Part D Claims, Including Refills, Number of Standardized 30-Day Fills, Including Refills, Number of Day’s Supply for All Claims, Aggregate Cost Paid for All Claims, Aggregate Cost Paid for All Claims, etc.)
 
 
 ### CDC Deaths
