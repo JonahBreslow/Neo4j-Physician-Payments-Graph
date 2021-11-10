@@ -11,6 +11,7 @@
 1. How does money affect prescription rates. Do doctors that receive money from pharmaceutical companies presecribe more that/those company's drugs?
 2. Is there a similar relationship in regards to the hospital and pharmaceutical companies
 3. Is there a link between how much in total pharmaceutical companies spend in a state and that state's opiod death rate/count?
+4. How do dollars given to a doctor per opiod perscription compare to other drugs.
 
 ## Data Descriptions:
 
