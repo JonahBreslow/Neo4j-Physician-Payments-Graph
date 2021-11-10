@@ -15,8 +15,15 @@
 ## Data Descriptions:
 
 ### CMS Open Payments(Sunshine Act)
-
-
+1. Covers period 2013 to 2020. Covers the whole year in each period
+2. 3 Types of Payments:
+   - General Payments
+   - Research Payments
+   - Ownership Payments
+3. Each type of sheet includes information:
+   - Receiving institution or doctor
+   - Purpose of payment
+   - Paying insitution or person
 ### Part D Prescriptions
 
 
