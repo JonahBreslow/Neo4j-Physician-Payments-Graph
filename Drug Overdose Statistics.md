@@ -54,3 +54,13 @@ Data Link: https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts
     - *, **
 12. Predicted Value
     - Some values match that in column Data Value
+## Data Cleanup Procedures
+We need to remove as many missing values from the "Data Values" column as possible. 
+We can use the column Predicted Value to fill in the blanks
+1. If Data Value is Blank:
+    - If Predicted Value is not blank:
+        - Use that value
+    - Else
+        - Use average of value in previous time frame and next time frame
+        - This is going off the fact that the data values are listed as the sum of the last 12 months so the value for a particular month if missing should be the difference between the next month and the previous month.
+        - We cannot use the whole difference though because some value is from the following month so taking an average is the most fair.
