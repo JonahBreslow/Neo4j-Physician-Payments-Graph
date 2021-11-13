@@ -51,7 +51,6 @@ Data Link: https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts
     - Underreported due to incomplete data.  Data not shown due to low data quality.
     - Underreported due to incomplete data.  Data suppressed (<10).  Data not shown due to low data quality.
 11. Footnote Symbol
-    - *
-    - **
+    - *, **
 12. Predicted Value
     - Some values match that in column Data Value
