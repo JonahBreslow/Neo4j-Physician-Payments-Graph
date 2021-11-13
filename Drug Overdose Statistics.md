@@ -41,4 +41,17 @@ Data Link: https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts
     - If counts are complete and all investigation into the deaths concluded
 8. Percent Pending Investigation
 9. State Name
-10. 
+10. Footnote
+    - Numbers may differ from published reports using final data. See Technical Notes.  Data not shown due to low data quality.
+    - Numbers may differ from published reports using final data. See Technical Notes.
+    - Numbers may differ from published reports using final data. See Technical Notes.  Data suppressed (<10).  Data not shown due to low data quality.
+    - Numbers may differ from published reports using final data. See Technical Notes.  Data suppressed (<10).
+    - Underreported due to incomplete data.
+    - Underreported due to incomplete data.  Data suppressed (<10).
+    - Underreported due to incomplete data.  Data not shown due to low data quality.
+    - Underreported due to incomplete data.  Data suppressed (<10).  Data not shown due to low data quality.
+11. Footnote Symbol
+    - *
+    - **
+12. Predicted Value
+    - Some values match that in column Data Value
