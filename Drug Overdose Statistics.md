@@ -64,3 +64,15 @@ We can use the column Predicted Value to fill in the blanks
         - Use average of value in previous time frame and next time frame
         - This is going off the fact that the data values are listed as the sum of the last 12 months so the value for a particular month if missing should be the difference between the next month and the previous month.
         - We cannot use the whole difference though because some value is from the following month so taking an average is the most fair.
+## Nodes and Edges
+:Deaths{value : data.Values}<br>
+:Month{month : data.Month}<br>
+:Year{year : data.Year}<br>
+:DeathType{type : data.Indicator}<br>
+:State{state : data.State}<br>
+--------------------------------------<br>
+( :Deaths )-[ :OF_TYPE]->( :DeathType )<br>
+( :Deaths )-[ :LOCATED_IN]->( :State )<br>
+( :Deaths )-[ :OCCURED_IN]->( :Month )<br>
+( :Month )-[ :OF]->( :Year )<br>
+## Load Statement
