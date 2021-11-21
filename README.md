@@ -34,6 +34,7 @@
    - Prescriber Data (Name, NPI, City, State, Specialty)
    - Drug Data (Brand, USAN Generic Name - Short Version)
    - Prescription Data (Number of Medicare Part D Claims, Including Refills, Number of Standardized 30-Day Fills, Including Refills, Number of Day’s Supply for All Claims, Aggregate Cost Paid for All Claims, Aggregate Cost Paid for All Claims, etc.)
+3. [Methodology Full Description](https://data.cms.gov/resources/medicare-part-d-prescribers-by-provider-and-drug-data-dictionary)
 
 
 ### CDC Deaths
