@@ -14,22 +14,24 @@ You will see a large swath of jupyter lab notebooks in this repo. Each of these 
 
 ## How to use this repository:
 1. Clone this repo
-1. Download [CMS Open Payments Data](https://openpaymentsdata.cms.gov/dataset/qsys-b88w)
-   - Place this download file in the data folder *'Data/OP_DTL_GNRL_PGYR2019_P06302021.csv'*
-2. Download [Part D Prescriptions Data](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug/data/2019) (**PLEASE NOTE:** pre-filter the data to just CA)
-   - Place this download file in the data folder *'Data/Medicare_Part_D_Prescribers_by_Provider_and_Drug_2019.csv'*
-4. Download OpenFDA Data and place them in the folder *'Data/openfda_json'*
-   - [openfda_1](https://download.open.fda.gov/drug/label/drug-label-0001-of-0010.json.zip)
-   - [openfda_2](https://download.open.fda.gov/drug/label/drug-label-0002-of-0010.json.zip)
-   - [openfda_3](https://download.open.fda.gov/drug/label/drug-label-0003-of-0010.json.zip)
-   - [openfda_4](https://download.open.fda.gov/drug/label/drug-label-0004-of-0010.json.zip)
-   - [openfda_5](https://download.open.fda.gov/drug/label/drug-label-0005-of-0010.json.zip)
-   - [openfda_6](https://download.open.fda.gov/drug/label/drug-label-0006-of-0010.json.zip)
-   - [openfda_7](https://download.open.fda.gov/drug/label/drug-label-0007-of-0010.json.zip)
-   - [openfda_8](https://download.open.fda.gov/drug/label/drug-label-0008-of-0010.json.zip)
-   - [openfda_9](https://download.open.fda.gov/drug/label/drug-label-0009-of-0010.json.zip)
-   - [openfda_10](https://download.open.fda.gov/drug/label/drug-label-0010-of-0010.json.zip) 
-5. Make sure you have all dependencies installed
+2. Download zip file from [here]()
+    1. For your information, all sources can be found below
+        1. S [CMS Open Payments Data](https://openpaymentsdata.cms.gov/dataset/qsys-b88w)
+           - Place this download file in the data folder *'Data/OP_DTL_GNRL_PGYR2019_P06302021.csv'*
+        2. Download [Part D Prescriptions Data](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug/data/2019) (**PLEASE NOTE:** pre-filter the data to just CA)
+           - Place this download file in the data folder *'Data/Medicare_Part_D_Prescribers_by_Provider_and_Drug_2019.csv'*
+        3. Download OpenFDA Data and place them in the folder *'Data/openfda_json'*
+           - [openfda_1](https://download.open.fda.gov/drug/label/drug-label-0001-of-0010.json.zip)
+           - [openfda_2](https://download.open.fda.gov/drug/label/drug-label-0002-of-0010.json.zip)
+           - [openfda_3](https://download.open.fda.gov/drug/label/drug-label-0003-of-0010.json.zip)
+           - [openfda_4](https://download.open.fda.gov/drug/label/drug-label-0004-of-0010.json.zip)
+           - [openfda_5](https://download.open.fda.gov/drug/label/drug-label-0005-of-0010.json.zip)
+           - [openfda_6](https://download.open.fda.gov/drug/label/drug-label-0006-of-0010.json.zip)
+           - [openfda_7](https://download.open.fda.gov/drug/label/drug-label-0007-of-0010.json.zip)
+           - [openfda_8](https://download.open.fda.gov/drug/label/drug-label-0008-of-0010.json.zip)
+           - [openfda_9](https://download.open.fda.gov/drug/label/drug-label-0009-of-0010.json.zip)
+           - [openfda_10](https://download.open.fda.gov/drug/label/drug-label-0010-of-0010.json.zip) 
+6. Make sure you have all dependencies installed
    - In the future, we will update this repo with the required venv with all dependencies installed
    - Some dependencies you will need:
       - Pandas
@@ -39,12 +41,12 @@ You will see a large swath of jupyter lab notebooks in this repo. Each of these 
       - Pickle
       - py_stringmatchint
       - (probably more)
-6. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
+7. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
    - **NOTE:** The first cell may take up to 10 hours. The following cells are far quicker.
-7. This generates output csv files into the *"Nodes"* and *"Edges"* folder. 
-8. Copy these files into the *"import"* directory in your Neo4j application.
-9. Run the *"Cypher_Load"* script in your Neo4j browser
-10. Knowledge graph is created!
+8. This generates output csv files into the *"Nodes"* and *"Edges"* folder. 
+9. Copy these files into the *"import"* directory in your Neo4j application.
+10. Run the *"Cypher_Load"* script in your Neo4j browser
+11. Knowledge graph is created!
 
 ## Presentation
 A google presentation of this project can be found [here](https://docs.google.com/presentation/d/1CTyec4oKKbCgzUxYoKQenyqb7slMrhzmdhBv3PKmnYQ/edit#slide=id.g10623ce2b3e_2_283)
