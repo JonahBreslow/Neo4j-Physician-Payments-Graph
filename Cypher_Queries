@@ -16,6 +16,18 @@ MATCH (n)
 RETURN LABELS(n),
     count(n) AS n_nodes
 
+// Query - visual overview
+MATCH
+(m:Manufacturer) --> (d:Drug),
+(m:Manufacturer) --> (p:Payment),
+(p:Payment) --> (d:Drug),
+(p:Payment) --> (dr:Physician),
+(dr:Physician) --> (pre:Prescription)
+RETURN
+m, d, p, dr, pre, rand() as r
+ORDER BY r
+LIMIT 300
+
 // Query - Find drugs made by single manufacturer
 // that are opioids
 MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
