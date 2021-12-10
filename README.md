@@ -15,6 +15,7 @@ You will see a large swath of jupyter lab notebooks in this repo. Each of these 
 ## How to use this repository:
 1. Clone this repo
 2. Download zip file from [here]()
+3. Unzip the file to .....
     1. For your information, all sources can be found below
         1. S [CMS Open Payments Data](https://openpaymentsdata.cms.gov/dataset/qsys-b88w)
            - Place this download file in the data folder *'Data/OP_DTL_GNRL_PGYR2019_P06302021.csv'*
