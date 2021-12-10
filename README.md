@@ -7,7 +7,7 @@
 3. CDC Deaths by Type by Month and Year and State [Data](https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts/xkb8-kh2a/)
 4. https://www.springboardrecovery.com/opioid-prescription-addiction-generic-opioid-prescriptions/
 5. Openfda
-- [openfda_1](https://download.open.fda.gov/drug/label/drug-label-0001-of-0010.json.zip)
+   - [openfda_1](https://download.open.fda.gov/drug/label/drug-label-0001-of-0010.json.zip)
 - [openfda_2](https://download.open.fda.gov/drug/label/drug-label-0002-of-0010.json.zip)
 - [openfda_3](https://download.open.fda.gov/drug/label/drug-label-0003-of-0010.json.zip)
 - [openfda_4](https://download.open.fda.gov/drug/label/drug-label-0004-of-0010.json.zip)
