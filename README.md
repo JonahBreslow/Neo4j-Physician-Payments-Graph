@@ -27,7 +27,7 @@ Additionally, our PowerPoint presentation of the project is included as well.
       - Dedupe
       - Papermill
       - Pickle
-      - py_stringmatchint
+      - py_stringmatching
       - (probably more)
 7. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
    - **NOTE:** The first cell may take up to 10 hours. The following cells are far quicker.
