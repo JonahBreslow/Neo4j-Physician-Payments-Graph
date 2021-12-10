@@ -1,63 +1,151 @@
-// clear data
-MATCH (n)
-DETACH DELETE n;
+// Query - How many nodes - 3.6M
+MATCH (n) 
+RETURN count(n) AS n_nodes
 
+// Query - How many edges - 7.0M
+MATCH ()-[e]->() 
+RETURN count(e) AS n_edges
 
-// load Drug nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Drug_Node.csv" AS row
-CREATE (d:Drug {
-	drug_id:row.drug_id,
-	brand_name: row.brand_name,
-	generic_name: row.generic_name,
-    substance_name: row.substance_name,
-    route: row.route,
-    pharm_class_moa: row.pharm_class_moa,
-    pharm_class_cs: row.pharm_class_cs,
-    pharm_class_pe: row.pharm_class_pe,
-    pharm_class_epc: row.pharm_class_epc
-	})
-;
-// load Manuf nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Manufacturer.csv" AS row
-CREATE (m:Manufacturer {
-	manuf_id:row.manuf_id,
-	manufacturer_name: row.manufacturer_name
-	})
-	;
+// Query - Count of edges by type
+MATCH ()-[e]->() 
+RETURN type(e),
+    count(e) AS n_edges
 
+// Query - Count of nodes by type
+MATCH (n) 
+RETURN LABELS(n),
+    count(n) AS n_nodes
 
-// load Payment nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Payments_Node.csv" AS row
-CREATE (p:Payment {
-	payment_id:row.Record_ID,
-	amount: row.Total_Amount_of_Payment_USDollars,
-	date: row.Date_of_Payment,
-	number: row.Number_of_Payments_Included_in_Total_Amount,
-	form: row.Form_of_Payment_or_Transfer_of_Value,
-	nature: row.Nature_of_Payment_or_Transfer_of_Value
-	})
-	;
+// Query - Find drugs made by single manufacturer
+// that are opioids
+MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
+WITH d.drug_id as drug_id,COUNT(m) as m_count 
+WHERE m_count=1
+WITH collect(DISTINCT drug_id) AS single_drug_id
+MATCH (m2:Manufacturer) -[p:makes]-> (d:Drug) 
+WHERE d.drug_id IN single_drug_id  
+   AND d.pharm_class_epc =~ '.*OPIOID.*'
+RETURN DISTINCT
+d.drug_id,
+	d.brand_name as brand_name,
+	d.pharm_class_epc AS epc,
+	d.pharm_class_moa AS moa,
+	d.pharm_class_pe AS pe,
+m2.manufacturer_name as m_name
 
-// create Manuf-Drug relationships
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Drug_Edge.csv" AS row
-MATCH (d:Drug {drug_id: row.drug_id})
-MATCH (m:Manufacturer {manuf_id: row.manuf_id})
-MERGE (m)-[:manufacturs]->(d)
-RETURN *
-;
+// Query - Find drugs made by single manufacturer
+// that are opioids and show these manufacturers payments
+// to physicians
+MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
+WITH d.drug_id as drug_id,COUNT(m) as m_count 
+WHERE m_count=1
+WITH collect(DISTINCT drug_id) AS single_drug_id
+MATCH (m2:Manufacturer) -[p:makes]-> (d:Drug) 
+WHERE d.drug_id IN single_drug_id AND d.pharm_class_epc =~ '.*OPIOID.*'
+WITH collect(m2.manuf_id) as candidate_manufs
+MATCH (m3:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician) 
+WHERE m3.manuf_id IN candidate_manufs
+RETURN
+	m3.manufacturer_name AS big_pharma,
+	dr.physician_id AS physician_id,
+	dr.first_name AS doctor_fname,
+	dr.last_name AS doctor_lname,
+	dr.type AS specialty,
+sum(p.amount) AS tot_amount_paid
+ORDER BY tot_amount_paid DESC
 
-// create Manuf-Payment relationships
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Payment_Edge.csv" AS row
-MATCH (p:Payment {payment_id: row.Record_ID})
-MATCH (m:Manufacturer {manuf_id: row.manuf_id})
-MERGE (m)-[:paid]->(p)
-RETURN *
-;
+// Query - Find drugs made by single manufacturer
+// that are opioids and show these manufacturers payments to physicians
+// and show count of payments to physician
+MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
+WITH d.drug_id as drug_id,COUNT(m) as m_count 
+WHERE m_count=1
+
+WITH collect(DISTINCT drug_id) AS single_drug_id
+MATCH (m2:Manufacturer) -[p:makes]-> (d:Drug) 
+WHERE d.drug_id IN single_drug_id AND d.pharm_class_epc =~ '.*OPIOID.*'
+
+WITH collect(m2.manuf_id) as candidate_manufs
+MATCH (m3:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician) 
+WHERE m3.manuf_id IN candidate_manufs
+
+WITH collect(p.payment_id) as payment_ids
+MATCH (m:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician)
+WHERE p.payment_id in payment_ids
+RETURN 
+m.manufacturer_name AS big_pharma,
+m.manuf_id AS manuf_id,
+dr.physician_id AS physician_id,
+dr.first_name AS doctor_fname,
+dr.last_name AS doctor_lname,
+dr.type AS specialty,
+p.nature,
+sum(p.amount) as total_paid_to_dr,
+count(p.payment_id) as n_payments_to_dr
+
+ORDER BY total_paid_to_dr DESC
+
+// Query - payments to doctors from pharmacos that solely make a drug
+// groups payments by manuf-doctor-payment nature
+// MUST BE GIFTS
+MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
+WITH d.drug_id as drug_id,COUNT(m) as m_count 
+WHERE m_count=1
+
+WITH collect(DISTINCT drug_id) AS single_drug_id
+MATCH (m2:Manufacturer) -[p:makes]-> (d:Drug) 
+WHERE d.drug_id IN single_drug_id AND d.pharm_class_epc =~ '.*OPIOID.*'
+
+WITH collect(m2.manuf_id) as candidate_manufs
+MATCH (m3:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician) 
+WHERE m3.manuf_id IN candidate_manufs
+
+WITH collect(p.payment_id) as payment_ids
+MATCH (m:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician)
+WHERE p.payment_id in payment_ids AND p.nature=~ '.*GIFT.*'
+RETURN 
+m.manufacturer_name AS big_pharma,
+m.manuf_id AS manuf_id,
+dr.physician_id AS physician_id,
+dr.first_name AS doctor_fname,
+dr.last_name AS doctor_lname,
+dr.type AS specialty,
+p.nature,
+sum(p.amount) as total_paid_to_dr,
+count(p.payment_id) as n_payments_to_dr
+
+ORDER BY total_paid_to_dr DESC
+
+//Query - We know Allergan was only pharmaceutical to give gifts.
+// This looks at which doctors received gifts and looked at what
+// prescriptions were made.
+
+MATCH (m:Manufacturer) -[p:makes]-> (d:Drug) 
+WITH d.drug_id as drug_id,COUNT(m) as m_count 
+WHERE m_count=1
+
+WITH collect(DISTINCT drug_id) AS single_drug_id
+MATCH (m2:Manufacturer) -[p:makes]-> (d:Drug) 
+WHERE d.drug_id IN single_drug_id AND d.pharm_class_epc =~ '.*OPIOID.*'
+
+WITH collect(m2.manuf_id) as candidate_manufs
+MATCH (m3:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician) 
+WHERE m3.manuf_id IN candidate_manufs
+
+WITH collect(p.payment_id) as payment_ids
+MATCH (m:Manufacturer) -[:paid]-> (p:Payment) -[:paid_to]->(dr:Physician)
+WHERE p.payment_id in payment_ids AND p.nature=~ '.*GIFT.*'
+
+WITH collect(dr.physician_id) AS physician_ids
+MATCH (dr:Physician) -[:prescribed]-> (p:Prescription) -[:prescribed_for] -> (d:Drug),
+(m:Manufacturer) -[]-> (d)
+WHERE dr.physician_id IN physician_ids and m.manufacturer_name =~ '.*ALLERGAN.*'
+RETURN 
+	dr.physician_id,
+	d.brand_name,
+	d.pharm_class_epc,
+	COLLECT (m.manufacturer_name) as manufacturer
+
 
 
 
