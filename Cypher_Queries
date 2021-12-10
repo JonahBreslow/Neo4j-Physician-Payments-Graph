@@ -1,0 +1,64 @@
+// clear data
+MATCH (n)
+DETACH DELETE n;
+
+
+// load Drug nodes
+USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Drug_Node.csv" AS row
+CREATE (d:Drug {
+	drug_id:row.drug_id,
+	brand_name: row.brand_name,
+	generic_name: row.generic_name,
+    substance_name: row.substance_name,
+    route: row.route,
+    pharm_class_moa: row.pharm_class_moa,
+    pharm_class_cs: row.pharm_class_cs,
+    pharm_class_pe: row.pharm_class_pe,
+    pharm_class_epc: row.pharm_class_epc
+	})
+;
+// load Manuf nodes
+USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Manufacturer.csv" AS row
+CREATE (m:Manufacturer {
+	manuf_id:row.manuf_id,
+	manufacturer_name: row.manufacturer_name
+	})
+	;
+
+
+// load Payment nodes
+USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Payments_Node.csv" AS row
+CREATE (p:Payment {
+	payment_id:row.Record_ID,
+	amount: row.Total_Amount_of_Payment_USDollars,
+	date: row.Date_of_Payment,
+	number: row.Number_of_Payments_Included_in_Total_Amount,
+	form: row.Form_of_Payment_or_Transfer_of_Value,
+	nature: row.Nature_of_Payment_or_Transfer_of_Value
+	})
+	;
+
+// create Manuf-Drug relationships
+USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Drug_Edge.csv" AS row
+MATCH (d:Drug {drug_id: row.drug_id})
+MATCH (m:Manufacturer {manuf_id: row.manuf_id})
+MERGE (m)-[:manufacturs]->(d)
+RETURN *
+;
+
+// create Manuf-Payment relationships
+USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Payment_Edge.csv" AS row
+MATCH (p:Payment {payment_id: row.Record_ID})
+MATCH (m:Manufacturer {manuf_id: row.manuf_id})
+MERGE (m)-[:paid]->(p)
+RETURN *
+;
+
+
+
+
