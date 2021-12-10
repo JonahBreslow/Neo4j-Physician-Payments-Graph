@@ -4,8 +4,8 @@ DETACH DELETE n;
 
 
 // load Drug nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Drug_Node.csv" AS row
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Drug_Node.csv" AS row
 CREATE (d:Drug {
 	drug_id:row.drug_id,
 	brand_name: row.brand_name,
@@ -19,8 +19,8 @@ CREATE (d:Drug {
 	})
 ;
 // load Manuf nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Manufacturer.csv" AS row
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Manufacturer_Node.csv" AS row
 CREATE (m:Manufacturer {
 	manuf_id:row.manuf_id,
 	manufacturer_name: row.manufacturer_name
@@ -29,36 +29,107 @@ CREATE (m:Manufacturer {
 
 
 // load Payment nodes
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Nodes/Payments_Node.csv" AS row
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Payments_Node.csv" AS row
 CREATE (p:Payment {
 	payment_id:row.Record_ID,
-	amount: row.Total_Amount_of_Payment_USDollars,
+	amount: toFloat(row.Total_Amount_of_Payment_USDollars),
 	date: row.Date_of_Payment,
-	number: row.Number_of_Payments_Included_in_Total_Amount,
+	number: toInteger(row.Number_of_Payments_Included_in_Total_Amount),
 	form: row.Form_of_Payment_or_Transfer_of_Value,
 	nature: row.Nature_of_Payment_or_Transfer_of_Value
 	})
 	;
 
+//load Physician nodes
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Physicians_Node.csv" AS row
+CREATE (ph:Physician{
+	physician_id:row.physician_id,
+	first_name:row.fname,
+	last_name:row.lname,
+	type:row.type,
+	city:row.city
+	})
+	;
+
+
+
+
+//load Prescription nodes
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Prescriptions_Node.csv" AS row
+CREATE (pr:Prescription{
+	prescription_id: row.prescription_id,
+	year: row.Year,
+	total_claims: toInteger(row.Tot_Clms),
+	total_30_days_fills: toInteger(row.Tot_30day_Fills),
+	total_day_supply: toInteger(row.Tot_Day_Suply),
+	total_drug_cost: toFloat(row.Tot_Drug_Cst),
+	total_benefits: toInteger(row.Tot_Benes)
+	});
+
+CREATE Indexes
+CREATE INDEX ON :Drug(drug_id);
+CREATE INDEX ON :Manufacturer(manuf_id);
+CREATE INDEX ON :Payment(payment_id);
+CREATE INDEX ON :Physician(physician_id);
+CREATE INDEX ON :Prescription(prescription_id);
+
+//CREATE CONSTRAINT ON (n:Drug) ASSERT n.drug_id IS UNIQUE;
+//CREATE CONSTRAINT ON (n:Manufacturer) ASSERT n.manuf_id IS UNIQUE;
+//CREATE CONSTRAINT ON (n:Payment) ASSERT n.payment_id IS UNIQUE;
+//CREATE CONSTRAINT ON (n:Physician) ASSERT n.physician_id IS UNIQUE;
+//CREATE CONSTRAINT ON (n:Prescription) ASSERT n.prescription_id IS UNIQUE;
+
+
+
+//EDGES
+
 // create Manuf-Drug relationships
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Drug_Edge.csv" AS row
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Manufacturer_Drug_Edge.csv" AS row
 MATCH (d:Drug {drug_id: row.drug_id})
 MATCH (m:Manufacturer {manuf_id: row.manuf_id})
-MERGE (m)-[:manufacturs]->(d)
-RETURN *
+MERGE (m)-[:makes]->(d)
 ;
 
 // create Manuf-Payment relationships
-USING PERIODIC COMMIT 1000
-LOAD CSV WITH HEADERS FROM "file:///Users/jonahbreslow/Documents/DSE/2020-jfbreslow/DSE203/DSE-203-Knowledge-Graph/Edges/Manufacturer_Payment_Edge.csv" AS row
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Manufacturer_Payment_Edge.csv" AS row
 MATCH (p:Payment {payment_id: row.Record_ID})
 MATCH (m:Manufacturer {manuf_id: row.manuf_id})
 MERGE (m)-[:paid]->(p)
-RETURN *
 ;
 
+//create Payment-Drug relationships
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Payment_Drug_Edge.csv" AS row
+MATCH (p:Payment {payment_id: row.Record_ID})
+MATCH (d:Drug {drug_id: row.drug_id})
+MERGE (p)-[:paid_for]->(d)
+;
 
+//create Payment-Physicians relationship
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Payments_Physician_Edge.csv" AS row
+MATCH (p:Payment {payment_id: row.Record_ID})
+MATCH (ph:Physician {physician_id:row.physician_id})
+MERGE (p)-[:paid_to]->(ph)
+;
 
+//create Prescription-Drug relationship
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Prescription_Drug_Edge.csv" AS row
+MATCH (pr:Prescription {prescription_id:row.prescription_id})
+MATCH (d:Drug {drug_id: row.drug_id})
+MERGE (pr)-[:prescribed_for]->(d)
+;
 
+//create Prescription-Physician relationship
+:auto USING PERIODIC COMMIT 1000
+LOAD CSV WITH HEADERS FROM "file:///Prescription_Physician_Edge.csv" AS row
+MATCH (pr:Prescription {prescription_id:row.prescription_id})
+MATCH (ph:Physician {physician_id:row.physician_id})
+MERGE (ph)-[:prescribed]->(pr)
+;
