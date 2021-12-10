@@ -13,6 +13,7 @@ This repository contains jupyter notebooks that process, transform, entity-match
 You will see a large swath of jupyter lab notebooks in this repo. Each of these notebooks provides a very specific and modular step within the integration process. The main and most important notebook is called ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb). This is the most important notebook to run.
 
 ## How to use this repository:
+1. Clone this repo
 1. Download [CMS Open Payments Data](https://openpaymentsdata.cms.gov/dataset/qsys-b88w)
    - Place this download file in the data folder *'Data/OP_DTL_GNRL_PGYR2019_P06302021.csv'*
 2. Download [Part D Prescriptions Data](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug/data/2019) (**PLEASE NOTE:** pre-filter the data to just CA)
