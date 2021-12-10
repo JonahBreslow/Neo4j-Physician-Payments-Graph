@@ -30,7 +30,7 @@ Additionally, our PowerPoint presentation of the project is included as well.
       - py_stringmatching
       - (probably more)
 7. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
-   - **NOTE:** The first cell may take up to 10 hours. The following cells are far quicker.
+   - **NOTE:** The first cell may take up to 10 hours if the parameter "run_flatten" is changed to True. Keep it false and the following cells are far quicker.
 8. This generates output csv files into the *"Nodes"* and *"Edges"* folder. 
 9. Copy these files into the *"import"* directory in your Neo4j application.
 10. Run the *"Cypher_Load"* script in your Neo4j browser
