@@ -158,6 +158,48 @@ RETURN
 	d.pharm_class_epc,
 	COLLECT (m.manufacturer_name) as manufacturer
 
+//Lam Queries
+
+//Which cities had the highest number of prescriptions (Top 5)
+MATCH (ph:Physician)-[]->(pr:Prescription)
+RETURN ph.city as City, SUM(pr.total_30_days_fills) AS Total_30_Day_Fills
+ORDER BY Total_30_Day_Fills DESC
+LIMIT 5
+
+//San Diego, has half the population of Los Angeles and has half the number of prescriptions.
+//Sacramento has half the population of San Diego but has almost the same number of prescription.
+
+//What drugs are the most prescribed in the city of Sacramento
+MATCH (ph:Physician)-[]->(pr:Prescription)-[]->(d:Drug)
+WHERE ph.city =~ '.*sacramento*.'
+RETURN d.brand_name,
+	SUM(pr.total_30_days_fills) AS Total_30_Day_Fills
+ORDER BY Total_30_Day_Fills DESC
+
+//The top prescribed drugs: atorvastatin calcium and amlodipine besylate, are commonly used together to prevent high blood pressure. In fact, 4 of the top 5 drugs are for high blood pressure.
+
+//What percent of prescriptions do blood pressure drugs account for
+MATCH (ph:Physician)-[]->(pr:Prescription)-[]->(d:Drug)
+WHERE ph.city =~ '.*sacramento*.'
+RETURN d.brand_name,
+	((SUM(pr.total_30_days_fills)  * 100.0) / Sac_Total)  AS Percent_Of_Total_Fills
+ORDER BY Percent_Of_Total_Fills DESC
+LIMIT 5
+
+//4 of the top 5 drugs in Sacramento are prescribed for high blood pressure, these 4 drugs account for 18% of the total 30 day fills in the city.
+
+//Who is the number one receiver of cash?
+MATCH (p:Payment)-[]->(ph:Physician)
+RETURN ph.first_name + " " + ph.last_name AS Physician_Name,
+	SUM(p.amount) AS Total_Payment
+ORDER BY Total_Payment DESC
+LIMIT 1
+
+// William Binder - LA plastic surgeon, 3.8/5 on google reviews out of 10 reviews
+
+
+
+
 
 
 
