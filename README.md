@@ -6,7 +6,21 @@
 2. Part D prescriptions [Data](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/medicare-part-d-prescribers-by-provider-and-drug/data/2019)
 3. CDC Deaths by Type by Month and Year and State [Data](https://data.cdc.gov/NCHS/VSRR-Provisional-Drug-Overdose-Death-Counts/xkb8-kh2a/)
 4. https://www.springboardrecovery.com/opioid-prescription-addiction-generic-opioid-prescriptions/
-5. [Lucid Chart Graph POC](https://lucid.app/lucidchart/e4d591c7-a579-4043-903f-c08cebcb67b1/edit?viewport_loc=-11%2C-11%2C1571%2C876%2C0_0&invitationId=inv_f837e136-888d-478a-a245-304858e2eff7)
+5. Openfda
+    [openfda_1](https://download.open.fda.gov/drug/label/drug-label-0001-of-0010.json.zip)
+    [openfda_2](https://download.open.fda.gov/drug/label/drug-label-0002-of-0010.json.zip)
+    [openfda_3](https://download.open.fda.gov/drug/label/drug-label-0003-of-0010.json.zip)
+    [openfda_4](https://download.open.fda.gov/drug/label/drug-label-0004-of-0010.json.zip)
+    [openfda_5](https://download.open.fda.gov/drug/label/drug-label-0005-of-0010.json.zip)
+    [openfda_6](https://download.open.fda.gov/drug/label/drug-label-0006-of-0010.json.zip)
+    [openfda_7](https://download.open.fda.gov/drug/label/drug-label-0007-of-0010.json.zip)
+    [openfda_8](https://download.open.fda.gov/drug/label/drug-label-0008-of-0010.json.zip)
+    [openfda_9](https://download.open.fda.gov/drug/label/drug-label-0009-of-0010.json.zip)
+    [openfda_10](https://download.open.fda.gov/drug/label/drug-label-0010-of-0010.json.zip)
+   
+   
+   
+9. [Lucid Chart Graph POC](https://lucid.app/lucidchart/e4d591c7-a579-4043-903f-c08cebcb67b1/edit?viewport_loc=-11%2C-11%2C1571%2C876%2C0_0&invitationId=inv_f837e136-888d-478a-a245-304858e2eff7)
 
 ### Questions:
 1. How does money affect prescription rates. Do doctors that receive money from pharmaceutical companies presecribe more that/those company's drugs?
