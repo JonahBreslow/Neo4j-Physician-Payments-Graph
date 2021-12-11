@@ -79,3 +79,16 @@ A google presentation of this project can be found [here](https://docs.google.co
    - Prescription Data (Number of Medicare Part D Claims, Including Refills, Number of Standardized 30-Day Fills, Including Refills, Number of Day’s Supply for All Claims, Aggregate Cost Paid for All Claims, Aggregate Cost Paid for All Claims, etc.)
 3. [Methodology Full Description](https://data.cms.gov/resources/medicare-part-d-prescribers-by-provider-and-drug-data-dictionary)
 ### Openfda
+Data available in OpenFDA. There are more fields, we focused on these:
+1. brand_name
+2. generic_name
+3. manufacturer_name
+4. product_ndc
+5. product_type	route
+6. substance_name
+10. is_original_packager
+12. pharm_class_epc
+13. pharm_class_pe
+14. pharm_class_cs
+15. pharm_class_moa
+![image](https://user-images.githubusercontent.com/56984198/145657807-013b5121-1598-4f85-9e8c-b3a82a42cefd.png)
