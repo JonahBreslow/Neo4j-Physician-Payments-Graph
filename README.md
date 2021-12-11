@@ -16,10 +16,9 @@ Additionally, our PowerPoint presentation of the project is included as well.
 
 ## How to use this repository:
 1. Clone this repo
-2. Download zip file from [here]()
-3. Unzip the file to .....
-    
-6. Make sure you have all dependencies installed
+2. Find the file called Data.zip.001 at the root of the repository
+3. Unzip in place, if your computer prompts you, select the option to add files from zip into existing folders.    
+4. Make sure you have all dependencies installed
    - In the future, we will update this repo with the required venv with all dependencies installed
    - Some dependencies you will need:
       - Pandas
@@ -29,12 +28,12 @@ Additionally, our PowerPoint presentation of the project is included as well.
       - Pickle
       - py_stringmatching
       - (probably more)
-7. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
+5. Run the ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb).
    - **NOTE:** The first cell may take up to 10 hours if the parameter "run_flatten" is changed to True. Keep it false and the following cells are far quicker.
-8. This generates output csv files into the *"Nodes"* and *"Edges"* folder. 
-9. Copy these files into the *"import"* directory in your Neo4j application.
-10. Run the *"Cypher_Load"* script in your Neo4j browser
-11. Knowledge graph is created!
+6. This generates output csv files into the *"Nodes"* and *"Edges"* folder. 
+7. Copy these files into the *"import"* directory in your Neo4j application.
+8. Run the *"Cypher_Load"* script in your Neo4j browser
+9. Knowledge graph is created!
 
 ## Data 
 1. For your information, all sources can be found below
