@@ -8,7 +8,7 @@
 To investigate the flow of money from drug manufacturers to physicians and how that relates to drug prescriptions. Ultimately, we would like to provide a tool with the capability to identify networks of abuse.
 
 ## What this repository contains:
-This repository contains jupyter notebooks that process, transform, entity-match, and integrate physician payment data from the Sunshine Act with physician prescription data from Medicare Part D data. Additionally, we utilize an FDA data base to gain more information regarding pharmaceutical companies and their respective drugs.
+This repository contains jupyter notebooks that process, transform, entity-match, and integrate physician payment data from the Sunshine Act with physician prescription data from Medicare Part D data. Additionally, we utilize an FDA database to gain more information regarding pharmaceutical companies and their respective drugs.
 
 You will see a large swath of jupyter lab notebooks in this repo. Each of these notebooks provides a very specific and modular step within the integration process. The main and most important notebook is called ["Papermill_Workflow.ipynb"](https://github.com/JonahBreslow/DSE-203-Knowledge-Graph/blob/main/Papermill_Workflow.ipynb). This is the most important notebook to run.
 
